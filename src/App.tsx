@@ -1,6 +1,15 @@
 import React from "react";
-import HelloWorld from "./components/HelloWorld/HelloWorld";
+import Clock from './components/Clock/Clock';
+import ScoreRecorder from "components/ScoreRecorder/ScoreRecorder";
+import TypeTracker from "components/TypeTracker/TypeTracker";
 
-const App = () => <HelloWorld />;
-
-export default App;
+export default function App() 
+{
+    return ( 
+        <>
+            <Clock />
+            <ScoreRecorder />
+            <TypeTracker />
+        </>
+    )
+}
