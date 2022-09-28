@@ -9,7 +9,7 @@ export default function App()
         <>
             <Clock />
             <ScoreRecorder />
-            <TypeTracker />
+            <TypeTracker Text={'test test test'} />
         </>
     )
 }
