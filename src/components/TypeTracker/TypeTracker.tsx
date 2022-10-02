@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import useTrackerLogic from "src/hooks/useTrackerLogic/useTrackerLogic";
-import './TypeTracker.css'
+import Grid from '@mui/material/grid';
+import { Typography, Card, CardContent } from "@mui/material";
+import sliceToChuncks from "src/utilities/sliceToChuncks";
+import './TypeTracker.css';
 
 interface TypeTrackerProps {
     Text: string
@@ -8,17 +11,40 @@ interface TypeTrackerProps {
 
 export default function TypeTracker(props: TypeTrackerProps) : JSX.Element
 {
-    const [status, updateStatus] = useTrackerLogic(props.Text);
+    const [status, updateTrackerStatus] = useTrackerLogic(props.Text);
     
+    let sections : string[][] = sliceToChuncks(status.Words, 5);   
+    
+    useEffect(() => {
+        updateTrackerStatus('test');
 
-
+    }, []);
+    
     return (
-        <div>
-            { status.Words.slice(0, status.Position).map((word) => <p className='word completed'> word </p>)}
-            
-            <p className='word current'> { status.Words[status.Position] } </p>
-
-            { status.Words.slice(status.Position + 1).map((word) => <p className='word uncompleted'> word </p>)}
-        </div>
+        <Card className="tracker display-card">
+            <CardContent>
+                {
+                    sections.map((section) => 
+                        <Grid container spacing={2}>
+                            {
+                                section.map((word, index) => 
+                                    <Grid item>
+                                        <Typography 
+                                            className={`tracker word ${ 
+                                                index === status.Position ? "current" : 
+                                                    index < status.Position ? "completed" : 'regular'
+                                            }`}>
+                                                {word}
+                                        </Typography>
+                                    </Grid>
+                                )
+                            }
+                        </Grid>
+                    )
+                }
+            </CardContent>
+        </Card>
+        
     )
 }
+
