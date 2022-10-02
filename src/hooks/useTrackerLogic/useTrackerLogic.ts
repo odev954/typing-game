@@ -1,4 +1,5 @@
 import { useState } from "react";
+import _ from "lodash";
 
 export interface TrackerStatus
 {
@@ -9,7 +10,7 @@ export interface TrackerStatus
 
 export default function useTrackerLogic(text: string) : [TrackerStatus, (word: string) => boolean] {
     const [status, updateStatus] = useState<TrackerStatus>({ 
-        Words: text.split(' '), 
+        Words: _.shuffle(text.split(' ')), 
         Position: 0, 
         TyposCount: 0 
     });
@@ -17,24 +18,30 @@ export default function useTrackerLogic(text: string) : [TrackerStatus, (word: s
     return [
         status,
         (word : string) : boolean => {
-            let success : boolean = status.Words[status.Position] === word;  
+            let success : boolean = true;
             
-            if(success)
+            if(status.Position < status.Words.length)
             {
-                updateStatus({ 
-                    Words: status.Words, 
-                    Position: status.Position + 1, 
-                    TyposCount: status.TyposCount 
-                })
+                success = status.Words[status.Position] === word;  
+                
+                if(success)
+                {
+                    updateStatus({ 
+                        Words: status.Words, 
+                        Position: status.Position + 1, 
+                        TyposCount: status.TyposCount 
+                    })
+                }
+                else
+                {
+                    updateStatus({ 
+                        Words: status.Words, 
+                        Position: status.Position, 
+                        TyposCount: status.TyposCount + 1 
+                    })
+                }
             }
-            else
-            {
-                updateStatus({ 
-                    Words: status.Words, 
-                    Position: status.Position, 
-                    TyposCount: status.TyposCount + 1 
-                })
-            }
+            
 
             return success;
         }
