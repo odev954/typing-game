@@ -10,7 +10,7 @@ export default function App()
         <div className="container">
             <Clock />
             <ScoreRecorder />
-            <TypeTracker />
+            <TypeTracker Text={'test test test'}/>
         </div>
     )
 }

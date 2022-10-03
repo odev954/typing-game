@@ -1,0 +1,38 @@
+.tracker.display-card {
+    width: fit-content;
+    height: fit-content;
+    margin: 1em;
+    border-radius: 20px;
+    justify-content: center;
+}
+
+.tracker.word-input {
+    margin: 1em;
+}
+
+.tracker.word.completed {
+    color: rgb(0, 139, 0);
+    font-family: Calibri;
+    font-size: 25px;
+    background-color: transparent;
+    padding: .5em;
+    border-radius: 5px;
+}
+
+.tracker.word.current {
+    font-family: Calibri;
+    font-size: 25px;
+    color: black;
+    background-color: rgb(211, 211, 211);
+    padding: .5em;
+    border-radius: 5px;
+}
+
+.tracker.word.regular {
+    color: black;
+    font-family: Calibri;
+    font-size: 25px;
+    background-color: transparent;
+    padding: .5em;
+    border-radius: 5px;
+}
