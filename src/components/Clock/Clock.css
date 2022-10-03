@@ -5,6 +5,12 @@
     border-radius: 10%;
 }
 
+.clock.display-container {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+}
+
 .clock.styled-text {
     text-align: center;
     font-family: 'digital-clock-font';

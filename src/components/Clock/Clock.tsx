@@ -10,7 +10,7 @@ export default function Clock() : JSX.Element
     const timeoutSeconds = useClock(() => setAlert(_ => true), 3);
 
     return (
-        <Container>
+        <Container className="clock display-container">
             <Snackbar open={alert} message='stop!'></Snackbar>
             <Card className="clock display-card">
                 <CardContent>
