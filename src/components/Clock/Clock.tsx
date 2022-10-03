@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import useClock from "src/hooks/useClock/useClock";
 import Card from '@mui/material/Card';
-import { Snackbar, CardContent, Typography } from "@mui/material";
+import { Snackbar, CardContent, Typography, Container } from "@mui/material";
 import './Clock.css';
-import { Container } from "react-bootstrap";
 
 export default function Clock() : JSX.Element
 {
