@@ -6,6 +6,10 @@
     justify-content: center;
 }
 
+.tracker.word-input {
+    margin: 1em;
+}
+
 .tracker.word.completed {
     color: rgb(0, 139, 0);
     font-family: Calibri;
