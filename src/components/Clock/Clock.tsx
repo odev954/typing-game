@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import useClock from "src/hooks/useClock/useClock";
 import Card from '@mui/material/Card';
-import { Snackbar, CardContent, Typography, Container } from "@mui/material";
+import { Backdrop, CardContent, Typography, Container, Button } from "@mui/material";
 import './Clock.css';
 
 export default function Clock() : JSX.Element
 {
     const [alert, setAlert] = useState(false);
     const timeoutSeconds = useClock(() => setAlert(_ => true), 3);
+    const handleClose = useCallback(() => {
+        setAlert(_ => false);
+    }, [alert])
 
     return (
         <Container className="clock display-container">
-            <Snackbar open={alert} message='stop!'></Snackbar>
+            <Backdrop className="clock finish-backdrop" 
+                open={alert} 
+                onClick={handleClose}>
+                <Card className="clock display-finish">
+                    <CardContent>
+                        <Typography className="clock styled-text">Timeout! Timeout! Timeout!</Typography>
+                        <Typography className="clock styled-text">Your score is: {100} w/min</Typography>
+                    </CardContent>
+                </Card>
+                <Button className="clock play-btn" variant="contained">play again</Button>
+            </Backdrop>
             <Card className="clock display-card">
                 <CardContent>
                     <Typography className="clock styled-text">

@@ -5,6 +5,25 @@
     border-radius: 10%;
 }
 
+.clock.finish-backdrop {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    z-index: 10000;
+}
+
+.clock.play-btn {
+    font-size: 30px;
+    background: -webkit-linear-gradient(45deg, rgb(0, 98, 255) , rgb(0, 170, 255));
+}
+
+.clock.display-finish {
+    width: fit-content;
+    height: fit-content;
+    margin: 1em;
+    border-radius: 20px;
+}
+
 .clock.display-container {
     display: flex;
     justify-content: center;
