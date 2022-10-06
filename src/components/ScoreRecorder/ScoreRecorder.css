@@ -7,6 +7,13 @@
     justify-content: center;
 }
 
+.score-board.title {
+    margin-bottom: .25em;
+    background: -webkit-linear-gradient(45deg, rgb(0, 98, 255) , rgb(0, 170, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .score-board.card-content {
     display: flex;
     flex-direction: column;

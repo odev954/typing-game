@@ -9,20 +9,27 @@ export default function ScoreRecorder() : JSX.Element
 {
     const [getScores, ] = useStorage();
     let scores = getScores();
-    console.log(scores);
+    let scoreList = []
+
+    Object.keys(scores).forEach(key => {
+        scoreList.push({date: key, count: scores[key]});
+    });
+
+    scoreList = _.sortBy(scoreList, (score) => score.count).reverse();
+
     return (
         <Card className="score-board display-card">
             <CardContent className="score-board card-content">
-                <Typography variant="h4">Scores</Typography>
+                <Typography className="score-board title" variant="h4">Scores</Typography>
                 {
-                    Object.keys(scores).length !== 0 ? _.take(Object.keys(scores), 5).map(key => {
+                    scoreList.length !== 0 ? _.take(scoreList, 5).map(score => {
                         return (
                             <Grid container spacing={2}>
                                 <Grid item>
-                                    <Typography>{key}</Typography>
+                                    <Typography>{score.date}</Typography>
                                 </Grid>
                                 <Grid item>
-                                    <Typography>{scores[key]}</Typography>
+                                    <Typography>{score.count}</Typography>
                                 </Grid>
                             </Grid>
                         )
