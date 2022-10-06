@@ -3,11 +3,21 @@
     height: fit-content;
     margin: 1em;
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.tracker.card-content {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
 .tracker.word-input {
     margin: 1em;
+    width: auto;
 }
 
 .tracker.word.completed {

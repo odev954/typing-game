@@ -39,7 +39,7 @@
     -webkit-text-fill-color: transparent;
 }
 
-@font-face{
+@font-face {
     font-family:'digital-clock-font';
     src: url('../../../public/fonts/digital-7.ttf');
-   }
+}

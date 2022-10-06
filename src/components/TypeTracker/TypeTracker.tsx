@@ -61,7 +61,7 @@ export default function TypeTracker(props: TypeTrackerProps) : JSX.Element
             >
                 <Alert severity="error">Wrong! You had a typo error! Try again...</Alert>
             </Snackbar> 
-            <CardContent>
+            <CardContent className="tracker card-content">
                 {
                     sections.map((section, sectionIndex) => 
                         <Grid container spacing={2}>
