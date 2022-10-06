@@ -9,7 +9,7 @@ export interface TrackerStatus
     TyposCount: number;
 }
 
-export default function useTrackerLogic() : [TrackerStatus, (word: string) => boolean] {
+export default function useTrackerLogic() : [TrackerStatus, (word: string) => boolean, () => void] {
     const text = useWords();
     const [status, updateStatus] = useState<TrackerStatus>({ 
         Words: _.shuffle(text.split(' ')), 
@@ -35,6 +35,13 @@ export default function useTrackerLogic() : [TrackerStatus, (word: string) => bo
             }
 
             return success;
+        },
+        () => {
+            updateStatus({
+                Words: _.shuffle(text.split(' ')), 
+                Position: 0, 
+                TyposCount: 0 
+            })
         }
     ]
 }

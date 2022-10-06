@@ -11,7 +11,7 @@ export default function TypeTracker() : JSX.Element
 {
     const [alert, setAlert] = useState(false);
     const [isTypo, updateIsTypo] = useState(false);
-    const [status, updateTrackerStatus] = useTrackerLogic();
+    const [status, updateTrackerStatus, resetTracker] = useTrackerLogic();
     const textInputRef = useRef(null);
     const [, updateScores] = useStorage();
     
@@ -23,7 +23,8 @@ export default function TypeTracker() : JSX.Element
         updateScores({
             date: new Date(Date.now()),
             count: status.Position
-        })
+        });
+        resetTracker();
     }, [alert, status]) 
     
     const inputHandler = useCallback(() => {
@@ -45,15 +46,14 @@ export default function TypeTracker() : JSX.Element
     return (
         <Card className="tracker display-card">
             <Backdrop className="clock finish-backdrop" 
-                open={alert} 
-                onClick={handleClose}>
+                open={alert} >
                 <Card className="clock display-finish">
                     <CardContent>
                         <Typography className="clock styled-text">Timeout! Timeout! Timeout!</Typography>
                         <Typography className="clock styled-text">Your score is: {status.Position} w/min</Typography>
                     </CardContent>
                 </Card>
-                <Button className="clock play-btn" variant="contained">play again</Button>
+                <Button className="clock play-btn" onClick={handleClose} variant="contained">play again</Button>
             </Backdrop>
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
