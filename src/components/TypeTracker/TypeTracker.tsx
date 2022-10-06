@@ -6,15 +6,11 @@ import useClock from "src/hooks/useClock/useClock";
 import _ from 'lodash';
 import './TypeTracker.css';
 
-interface TypeTrackerProps {
-    Text: string
-}
-
-export default function TypeTracker(props: TypeTrackerProps) : JSX.Element
+export default function TypeTracker() : JSX.Element
 {
     const [alert, setAlert] = useState(false);
     const [isTypo, updateIsTypo] = useState(false);
-    const [status, updateTrackerStatus] = useTrackerLogic(props.Text);
+    const [status, updateTrackerStatus] = useTrackerLogic();
     const textInputRef = useRef(null);
     const WORDS_PER_ROW : number = 5;
     let sections : string[][] = _.chunk(status.Words, WORDS_PER_ROW);  
