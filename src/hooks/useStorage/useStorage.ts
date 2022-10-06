@@ -1,4 +1,4 @@
-export default function useStorage()
+export default function useStorage() : [() => any, (score : { date: Date, count: number }) => void] 
 {
     let scores = {};
     
@@ -9,11 +9,16 @@ export default function useStorage()
         localStorage.setItem('scores', JSON.stringify({}));
     }
 
-    return (score : { date: Date, count: number }) => {
-        let scores = JSON.parse(localStorage.getItem('scores'));
+    return [
+            //getter
+            () => JSON.parse(localStorage.getItem('scores')),
+            
+            (score : { date: Date, count: number }) => {
+            let scores = JSON.parse(localStorage.getItem('scores'));
 
-        scores[score.date.toDateString()] = score.count;
+            scores[score.date.toLocaleString()] = score.count;
 
-        localStorage.setItem('scores', JSON.stringify(scores));
-    }
+            localStorage.setItem('scores', JSON.stringify(scores));
+        }
+    ]
 }

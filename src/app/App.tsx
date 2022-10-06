@@ -12,8 +12,8 @@ export default function App()
     return ( 
         <div className="container">
             <Clock />
-            <ScoreRecorder />
             <TypeTracker/>
+            <ScoreRecorder />
         </div>
     )
 }

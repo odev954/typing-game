@@ -1,0 +1,14 @@
+.score-board.display-card {
+    width: fit-content;
+    height: fit-content;
+    margin: 1em;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.score-board.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
