@@ -27,7 +27,8 @@ export default function useTrackerLogic() : [TrackerStatus, (word: string) => bo
                 success = status.Words[status.Position] === word;  
                 
                 updateStatus({ 
-                    Words: status.Position + 1 === status.Words.length ? status.Words.concat(_.shuffle(text.split(' '))) : status.Words, 
+                    Words: status.Position + 1 === Math.floor(status.Words.length / 2) ? 
+                           status.Words.concat(_.shuffle(text.split(' '))) : status.Words, 
                     Position: status.Position + (success ? 1 : 0), 
                     TyposCount: status.TyposCount + (!success ? 1 : 0)
                 })
