@@ -15,11 +15,11 @@ export default function TypeTracker(props: TypeTrackerProps) : JSX.Element
     const [alert, setAlert] = useState(false);
     const [isTypo, updateIsTypo] = useState(false);
     const [status, updateTrackerStatus] = useTrackerLogic(props.Text);
-    const timeoutSeconds = useClock(() => setAlert(_ => true));
     const textInputRef = useRef(null);
     const WORDS_PER_ROW : number = 5;
     let sections : string[][] = _.chunk(status.Words, WORDS_PER_ROW);  
     
+    useClock(() => setAlert(_ => true));
     const handleClose = useCallback(() => {
         setAlert(_ => false);
     }, [alert]) 
