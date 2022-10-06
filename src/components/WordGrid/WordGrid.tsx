@@ -3,6 +3,7 @@ import useTrackerLogic, { TrackerStatus } from "src/hooks/useTrackerLogic/useTra
 import Grid from '@mui/material/grid';
 import { Typography } from "@mui/material";
 import _ from 'lodash';
+import './WordGrid.css';
 
 export interface WordGridProps 
 {
@@ -18,22 +19,20 @@ export default function WordGrid(props : WordGridProps) : JSX.Element
     
     useEffect(() => {
         if((props.Status.Position + 1) % props.WordLimit === 0 && 
-           (props.Status.Position + 1) / props.WordLimit > props.RowLimit) 
+           (props.Status.Position + 1) / props.WordLimit > props.RowLimit - 1) 
         {
             updateRowOffest(rowOffest + 1);
         }
-        console.log(sections);
     }, [props.Status.Position]);
     
     return (
         <>
             {
                 sections.map((section, sectionIndex) => {
-                    console.log('section index: ', sectionIndex);
-                    if(sectionIndex >= rowOffest && sectionIndex <= rowOffest + props.RowLimit)
+                    if(sectionIndex >= rowOffest && sectionIndex <= rowOffest + props.RowLimit - 1)
                     {
 
-                        return (<Grid container spacing={2}>
+                        return (<Grid className="word-grid" container spacing={2}>
                             {
                                 section.map((word, index) => 
                                     <Grid item>
