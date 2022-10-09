@@ -1,0 +1,45 @@
+.clock.display-card {
+    width: 20%;
+    height: fit-content;
+    margin: 1em;
+    border-radius: 10%;
+}
+
+.clock.finish-backdrop {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    z-index: 10000;
+}
+
+.clock.play-btn {
+    font-size: 30px;
+    background: -webkit-linear-gradient(45deg, rgb(0, 98, 255) , rgb(0, 170, 255));
+}
+
+.clock.display-finish {
+    width: fit-content;
+    height: fit-content;
+    margin: 1em;
+    border-radius: 20px;
+}
+
+.clock.display-container {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+}
+
+.clock.styled-text {
+    text-align: center;
+    font-family: 'digital-clock-font';
+    font-size: 5rem;
+    background: -webkit-linear-gradient(45deg, rgb(0, 98, 255) , rgb(0, 170, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@font-face {
+    font-family:'digital-clock-font';
+    src: url('../../../public/fonts/digital-7.ttf');
+}
