@@ -1,37 +1,25 @@
 import React, { useCallback, useRef, useState } from "react";
-import useTrackerLogic from "src/hooks/useTrackerLogic/useTrackerLogic";
-import { Typography, Card, CardContent, TextField, Snackbar, Alert, Backdrop, Button } from "@mui/material";
-import useClock from "src/hooks/useClock/useClock";
+import { Card, CardContent, TextField, Snackbar, Alert} from "@mui/material";
 import _ from 'lodash';
 import './TypeTracker.css';
 import WordGrid from "components/WordGrid/WordGrid";
-import useStorage from "src/hooks/useStorage/useStorage";
+import { TrackerStatus } from "src/hooks/useTrackerLogic/useTrackerLogic";
 
-export default function TypeTracker() : JSX.Element
+export interface TypeTrackerProps {
+    UpdateTrackerStatus: (word: string) => boolean,
+    Status: TrackerStatus
+}
+
+export default function TypeTracker(props: TypeTrackerProps) : JSX.Element
 {
-    const [alert, setAlert] = useState(false);
     const [isTypo, updateIsTypo] = useState(false);
-    const [status, updateTrackerStatus, resetTracker] = useTrackerLogic();
     const textInputRef = useRef(null);
-    const [, updateScores] = useStorage();
-    
-    useClock(() => {
-        setAlert(_ => true);
-    });
-    const handleClose = useCallback(() => {
-        setAlert(_ => false);
-        updateScores({
-            date: new Date(Date.now()),
-            count: status.Position
-        });
-        resetTracker();
-    }, [alert, status]) 
     
     const inputHandler = useCallback(() => {
         let flag = false;
         if(textInputRef.current.value[textInputRef.current.value.length - 1] === ' ')
         {
-            flag = updateTrackerStatus(textInputRef.current.value.slice(0, -1));
+            flag = props.UpdateTrackerStatus(textInputRef.current.value.slice(0, -1));
 
             textInputRef.current.value = '';
             
@@ -40,21 +28,11 @@ export default function TypeTracker() : JSX.Element
                 updateIsTypo(_ => true);
             }
         }
-    }, [textInputRef, status, isTypo]);
+    }, [textInputRef, props.Status, isTypo]);
     const onErrorClose = useCallback(() => updateIsTypo(_ => false), [isTypo]);
 
     return (
         <Card className="tracker display-card">
-            <Backdrop className="clock finish-backdrop" 
-                open={alert} >
-                <Card className="clock display-finish">
-                    <CardContent>
-                        <Typography className="clock styled-text">Timeout! Timeout! Timeout!</Typography>
-                        <Typography className="clock styled-text">Your score is: {status.Position} w/min</Typography>
-                    </CardContent>
-                </Card>
-                <Button className="clock play-btn" onClick={handleClose} variant="contained">play again</Button>
-            </Backdrop>
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 open={isTypo}
@@ -64,7 +42,7 @@ export default function TypeTracker() : JSX.Element
                 <Alert severity="error">Wrong! You had a typo error! Try again...</Alert>
             </Snackbar> 
             <CardContent className="tracker card-content">
-                <WordGrid Status={status} RowLimit={2} WordLimit={5} />
+                <WordGrid Status={props.Status} RowLimit={2} WordLimit={5} />
                 <TextField className="tracker word-input" label="Word" inputRef={textInputRef} variant="filled" onChange={inputHandler} />
             </CardContent>
         </Card>
