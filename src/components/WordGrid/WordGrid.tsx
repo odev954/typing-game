@@ -18,7 +18,11 @@ export default function WordGrid(props : WordGridProps) : JSX.Element
     let sections = _.chunk(props.Status.Words, props.WordLimit);
     
     useEffect(() => {
-        if((props.Status.Position + 1) % props.WordLimit === 0 && 
+        if(props.Status.Position === 0)
+        {
+            updateRowOffest(0);
+        }
+        else if((props.Status.Position + 1) % props.WordLimit === 0 && 
            (props.Status.Position + 1) / props.WordLimit > props.RowLimit - 1) 
         {
             updateRowOffest(rowOffest + 1);
